@@ -15,8 +15,21 @@ class Plugin {
 	/** @var Admin_Page */
 	private $admin_page = NULL;
 
+	/** @var Notifier */
+	private $notifier = NULL;
+
 	public function admin() {
+		if ( !isset($this->admin_page) ) {
+			$this->admin_page = new Admin_Page();
+		}
 		return $this->admin_page;
+	}
+
+	public function notifier() {
+		if ( !isset($this->notifier) ) {
+			$this->notifier = new Notifier();
+		}
+		return $this->notifier;
 	}
 
 	private function setup( $plugin_file ) {
@@ -26,15 +39,17 @@ class Plugin {
 			$this->setup_admin_page();
 		}
 
-		if ( !is_admin() ) {
-
-		}
+		$this->setup_notification_listener();
 	}
 
 
 	private function setup_admin_page() {
-		$this->admin_page = new Admin_Page();
-		add_action( 'admin_menu', array( $this->admin_page, 'register' ), 11, 0 );
+		add_action( 'admin_menu', array( $this->admin(), 'register' ), 11, 0 );
+	}
+
+	private function setup_notification_listener() {
+		add_action( 'save_post', array( $this->notifier(), 'listen_for_saved_post' ), 10, 2 );
+		add_action( 'shutdown', array( $this->notifier(), 'send_notifications' ), 0, 0 );
 	}
 
 	public static function init( $file ) {
@@ -54,9 +69,35 @@ class Plugin {
 			return;
 		}
 		$path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-		$path = dirname(self::$plugin_file) . DIRECTORY_SEPARATOR . $path . '.php';
+		$path = self::path() . DIRECTORY_SEPARATOR . $path . '.php';
 		if (file_exists($path)) {
 			require $path;
 		}
+	}
+
+
+	/**
+	 * Get the absolute system path to the plugin directory, or a file therein
+	 * @static
+	 * @param string $path
+	 * @return string
+	 */
+	public static function path( $path = '' ) {
+		$base = dirname(self::$plugin_file);
+		if ( $path ) {
+			return trailingslashit($base).$path;
+		} else {
+			return untrailingslashit($base);
+		}
+	}
+
+	/**
+	 * Get the absolute URL to the plugin directory, or a file therein
+	 * @static
+	 * @param string $path
+	 * @return string
+	 */
+	public static function url( $path = '' ) {
+		return plugins_url($path, self::$plugin_file);
 	}
 } 
