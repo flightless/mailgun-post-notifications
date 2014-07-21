@@ -16,6 +16,8 @@ You'll find the "Mailgun Lists" settings page in the Settings admin menu. After 
 
 `mailgun_post_notification_post_types` - Filter the post types for which notifications will be sent. Defaults to just `post`.
 
+`mailgun_post_notification_api_arguments` - Filter any of the arguments sent to Mailgun to send the email (e.g., filter the 'from' or 'reply-to' headers)
+
 ## Templates
 
 All emails are sent with both a text version and an HTML version. You can independently manage the templates for each.
@@ -25,13 +27,13 @@ The default templates can be found in the plugin's `email-templates` directory. 
 ```
 [your_theme]
    - mailgun
-        - html
-             - new-post.php
-        - text
-             - new-post.php
-   index.php
-   style.css
-   etc.
+   |  - html
+   |  |  - new-post.php
+   |  - text
+   |  |  - new-post.php
+   - index.php
+   - style.css
+   - etc.
 ```
 
 Within your templates, you have access to the global `$post` object, and normal template tags like `the_title()`, `the_permalink()`, and `the_excerpt()` will all work.
