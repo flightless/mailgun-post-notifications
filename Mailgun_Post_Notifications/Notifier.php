@@ -12,21 +12,29 @@ class Notifier {
 	}
 
 	protected function should_send_notifications_for( $post_id ) {
+		$send = TRUE;
 		if ( empty($post_id) ) {
-			return FALSE;
-		}
-		if ( get_post_status($post_id) != 'publish' ) {
-			return FALSE;
-		}
-		if ( get_post_meta( $post_id, '_mailgun_notification_sent', TRUE ) ) {
-			return FALSE;
+			return FALSE; // short circuit, as most of the following checks will cause an error without an ID
 		}
 
-		if ( !in_array( get_post_type($post_id), $this->post_types_to_notify() ) ) {
-			return FALSE;
+		if ( get_post_status($post_id) != 'publish' ) { // only notify for published posts
+			$send = FALSE;
 		}
 
-		return apply_filters( 'should_send_mailgun_post_notification', TRUE, $post_id );
+		if ( get_post_meta( $post_id, '_mailgun_notification_sent', TRUE ) ) { // only one notification per post
+			$send = FALSE;
+		}
+
+		if ( !in_array( get_post_type($post_id), $this->post_types_to_notify() ) ) { // only notify for whitelisted post types
+			$send = FALSE;
+		}
+
+		$post_time = get_post_time( 'U', TRUE, $post_id );
+		if ( time() - $post_time > ( DAY_IN_SECONDS / 2 ) ) { // only notify for posts published in the last 12 hours
+			$send = FALSE;
+		}
+
+		return apply_filters( 'should_send_mailgun_post_notification', $send, $post_id );
 	}
 
 	protected function post_types_to_notify() {

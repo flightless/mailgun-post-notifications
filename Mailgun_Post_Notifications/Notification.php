@@ -23,15 +23,19 @@ class Notification {
 		$text = $this->get_text();
 		wp_reset_postdata();
 
-		$api = \Mailgun_Subscriptions\Plugin::instance()->api();
-		$response = $api->post( $this->get_domain($address).'/messages', array(
+		$notification_args = array(
 			'from' => $this->get_from_header(),
 			'to' => $address,
 			'subject' => $subject,
 			'text' => $text,
 			'html' => $html,
-		));
-		return;
+			'h:Reply-To' => $address,
+		);
+
+		$notification_args = apply_filters( 'mailgun_post_notification_api_arguments', $notification_args, $this->post_id );
+
+		$api = \Mailgun_Subscriptions\Plugin::instance()->api();
+		$api->post( $this->get_domain($address).'/messages', $notification_args);
 	}
 
 	protected function get_html() {
