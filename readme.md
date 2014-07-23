@@ -14,9 +14,35 @@ You'll find the "Mailgun Lists" settings page in the Settings admin menu. After 
 
 `should_send_mailgun_post_notification` - Return `FALSE` to this filter to prevent a notification from sending.
 
+```php
+function my_filter_for_should_send_mailgun_post_notification( $should_send, $post_id ) {
+	if ( get_post_meta( $post_id, '_some_interesting_meta_key', TRUE ) == 1 ) {
+		$should_send = FALSE;
+	}
+	return $should_send;
+}
+add_filter( 'should_send_mailgun_post_notification', 'my_filter_for_should_send_mailgun_post_notification', 10, 2 );
+```
+
 `mailgun_post_notification_post_types` - Filter the post types for which notifications will be sent. Defaults to just `post`.
 
+```php
+function my_filter_for_mailgun_post_notification_post_types( $post_types ) {
+	$post_types[] = 'page'; // notify subscribers when a new Page is published
+	return $post_types;
+}
+add_filter( 'mailgun_post_notification_post_types', 'my_filter_for_mailgun_post_notification_post_types', 10, 1 );
+```
+
 `mailgun_post_notification_api_arguments` - Filter any of the arguments sent to Mailgun to send the email (e.g., filter the 'from' or 'reply-to' headers)
+
+```php
+function my_filter_for_mailgun_post_notification_api_arguments( $args ) {
+	unset($args['text']); // never send text version of the email
+	return $args;
+}
+add_filter( 'mailgun_post_notification_api_arguments', 'my_filter_for_mailgun_post_notification_api_arguments', 10, 1 );
+```
 
 ## Templates
 
