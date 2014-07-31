@@ -43,7 +43,7 @@ class Notification {
 		$template = $this->get_template('html/new-post.php');
 		ob_start();
 		include($template);
-		return ob_get_clean();
+		return $this->sanitize_string(ob_get_clean());
 	}
 
 	protected function get_text() {
@@ -51,7 +51,7 @@ class Notification {
 		$template = $this->get_template('text/new-post.php');
 		ob_start();
 		include($template);
-		return ob_get_clean();
+		return $this->sanitize_string(ob_get_clean());
 	}
 
 	protected function setup_post_global() {
@@ -86,18 +86,23 @@ class Notification {
 			$from_address = get_option( 'admin_email' );
 		}
 
-		return sprintf( '%s <%s>', $from_name, $from_address );
+		return sprintf( '%s <%s>', $this->sanitize_string($from_name), $from_address );
 	}
 
 	protected function get_subject() {
 		$subject = get_option( 'mailgun_post_notifications_subject', '' );
 		$subject = str_replace( '[blog_name]', get_bloginfo('name'), $subject );
 		$subject = str_replace( '[post_title]', get_the_title(), $subject );
-		return $subject;
+		return $this->sanitize_string($subject);
 	}
 
 	protected function get_domain( $address ) {
 		$parts = explode('@', $address);
 		return end($parts);
+	}
+
+	protected function sanitize_string( $string ) {
+		$string = html_entity_decode($string);
+		return $string;
 	}
 } 
