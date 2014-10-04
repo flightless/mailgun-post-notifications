@@ -66,7 +66,7 @@
 														<a
 															href="<?php the_permalink(); ?>"
 															style="color: #1e6ec1; text-decoration: none !important;"><?php the_title(); ?></a></h2>
-													<span style="color: #888;">by <?php the_author(); ?></span>
+													<span style="color: #888;"><?php printf( __('by %s', 'mailgun-post-notifications'), the_author() ); ?></span>
 												</td>
 											</tr>
 										</table>

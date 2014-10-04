@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mailgun Post Notifications\n"
-"POT-Creation-Date: 2014-10-04 16:53+0100\n"
-"PO-Revision-Date: 2014-10-04 16:53+0100\n"
+"POT-Creation-Date: 2014-10-04 17:17+0100\n"
+"PO-Revision-Date: 2014-10-04 17:17+0100\n"
 "Last-Translator: Pierre Prinetti\n"
 "Language-Team: Pierre Prinetti\n"
 "Language: it\n"
@@ -80,6 +80,11 @@ msgstr "-- Scegliere una lista --"
 #, php-format
 msgid "New post published at <strong>%s</strong>"
 msgstr "Nuovo articolo pubblicato su <strong>%s</strong>"
+
+#: email-templates/html/new-post.php:69
+#, php-format
+msgid "by %s"
+msgstr "di %s"
 
 #: email-templates/html/new-post.php:76
 msgid "Read more"
