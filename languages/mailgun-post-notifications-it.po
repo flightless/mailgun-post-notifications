@@ -1,0 +1,125 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mailgun Post Notifications\n"
+"POT-Creation-Date: 2014-10-04 16:53+0100\n"
+"PO-Revision-Date: 2014-10-04 16:53+0100\n"
+"Last-Translator: Pierre Prinetti\n"
+"Language-Team: Pierre Prinetti\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:17
+msgid "New Post Notifications"
+msgstr "Notifiche per i nuovi articoli"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:24
+msgid "List to notify"
+msgstr "Lista per le notifiche"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:30
+msgid "Notifications for new posts will be sent to this list"
+msgstr "Notifiche per i nuovi articoli saranno inviate a questa lista"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:40
+msgid "\"From\" Name"
+msgstr "Nome mittente"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:46
+msgid ""
+"Notification emails will display this name in the \"From\" field. If blank, "
+"the blog name will be used."
+msgstr ""
+"Le notifiche avranno questo nome nel campo \"Da\". Se non compilato, verrà "
+"usato il titolo del sito."
+
+#: Mailgun_Post_Notifications/Admin_Page.php:56
+msgid "\"From\" Address"
+msgstr "Indirizzo mittente"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:62
+msgid ""
+"Notification emails will display this email address in the \"From\" field. "
+"If blank, the admin email address will be used."
+msgstr ""
+"Le notifiche avranno questo indirizzo nel campo \"Da\". Se non compilato, "
+"verrà usato l'indirizzo e-mail di amministrazione del sito."
+
+#: Mailgun_Post_Notifications/Admin_Page.php:72
+msgid "Subject"
+msgstr "Oggetto"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:78
+msgid ""
+"Subject line for the notification emails. <code>[blog_name]</code> will be "
+"replaced with the blog name. <code>[post_title]</code> will be replaced with "
+"the post title."
+msgstr ""
+"Oggetto della e-mail di notifica. Il codice <code>[blog_name]</code> sarà "
+"rimpiazzato dal titolo del sito. <code>[post_title]</code> sarà rimpiazzato "
+"dal titolo dell'articolo."
+
+#: Mailgun_Post_Notifications/Admin_Page.php:79
+msgid "[[blog_name]] New Post: [post_title]"
+msgstr "[[blog_name]] Nuovo articolo: [post_title]"
+
+#: Mailgun_Post_Notifications/Admin_Page.php:97
+msgid "-- Select a List --"
+msgstr "-- Scegliere una lista --"
+
+#: email-templates/html/new-post.php:50
+#, php-format
+msgid "New post published at <strong>%s</strong>"
+msgstr "Nuovo articolo pubblicato su <strong>%s</strong>"
+
+#: email-templates/html/new-post.php:76
+msgid "Read more"
+msgstr "continua a leggere"
+
+#: email-templates/html/new-post.php:82
+msgid "Tags: "
+msgstr "Tag:"
+
+#: email-templates/html/new-post.php:83
+msgid "Categories:"
+msgstr "Categorie:"
+
+#: email-templates/html/new-post.php:84
+msgid "URL:"
+msgstr "Indirizzo:"
+
+#: email-templates/text/new-post.php:13
+#, php-format
+msgid "New post published at %s"
+msgstr "Nuovo articolo pubblicato su %s"
+
+#: email-templates/text/new-post.php:21
+#, php-format
+msgid "URL: %s"
+msgstr "Indirizzo: %s"
+
+#: mailgun-post-notifications.php:46
+#, php-format
+msgid ""
+"MailGun Post Notifications requires PHP version %s or higher. You are using "
+"version %s."
+msgstr ""
+"MailGun Post Notifications richiede PHP %s o superiore. Ora è in uso la "
+"versione %s."
+
+#: mailgun-post-notifications.php:58
+msgid ""
+"MailGun Post Notifications requires the Mailgun Mailing List Subscriptions "
+"plugin."
+msgstr ""
+"Per utilizzare MailGun Post Notifications è necessario che sia installato il "
+"plugin Mailgun Mailing List Subscriptions."
